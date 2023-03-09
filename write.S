@@ -12,7 +12,7 @@
 
 %define M_EXTERN_CALL_SUFFIX 
 extern M_ERRNO_LOCATION
-;extern Mx
+
 section .text ; the text section is where we'll put executable code
 global M_FT_WRITE ; _start is our entry point - this is its declaration...
 
@@ -31,7 +31,7 @@ FT_WRITE_ERROR:
     neg  rax
 %endif
     push rax
-    call M_ERRNO_LOCATION M_EXTERN_CALL_SUFFIX
+    call __errno_location wrt ..plt
     pop  qword [rax]
     mov  rax, -1
     ret

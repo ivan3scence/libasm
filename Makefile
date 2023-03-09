@@ -12,10 +12,14 @@ CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 FLAGS = -F dwarf -g -f macho64
 MAINPRG = main_lol
 EXECPRG = exec_lol
+LIB 	= -L. -lasm
 
-#ifeq ($(MAKECMDGOALS), l)
-#FLAGS = -f elf64 -F dwarf -g -DLINUX=1
-#endif
+ifeq ($(MAKECMDGOALS), lr)
+FLAGS = -f elf64 -F dwarf -g -DLINUX=1
+endif
+ifeq ($(MAKECMDGOALS), l)
+FLAGS = -f elf64 -F dwarf -g -DLINUX=1
+endif
 
 .PHONY: all clean fclean re
 
@@ -24,6 +28,10 @@ EXECPRG = exec_lol
 	
 
 all: 	${NAME}
+
+l: 		all
+
+lr: 	fclean all
 
 x: 		${OBJ}
 	ld $? -o ${EXECPRG}

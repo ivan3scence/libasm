@@ -31,7 +31,7 @@ FT_READ_ERROR:
     neg  rax
 %endif
     push rax
-    call M_ERRNO_LOCATION M_EXTERN_CALL_SUFFIX
+    call __errno_location wrt ..plt
     pop  qword [rax]
     mov  rax, -1
     ret
