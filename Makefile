@@ -3,13 +3,15 @@ SRC = read.S\
 	  ft_strlen.S\
 	  ft_strcpy.S\
 	  ft_strcmp.S\
+	  ft_strdup.S\
 #SRC = $(addprefix src/, ${SOURCES})
 OBJ = $(patsubst %.S, %.o, ${SRC})
 NAME = libasm.a
 ASM = nasm
 CC   = cc
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address
-FLAGS = -F dwarf -g -f macho64
+#FLAGS = -F dwarf -g -f macho64
+FLAGS = -f elf64 -F dwarf -g -DLINUX=1
 MAINPRG = main_lol
 EXECPRG = exec_lol
 LIB 	= -L. -lasm
