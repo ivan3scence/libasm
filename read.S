@@ -1,25 +1,56 @@
+%ifdef LINUX
+    %define M_EXTERN_CALL_SUFFIX wrt ..plt
+    %define M_FT_READ ft_read
+    %define M_ERRNO_LOCATION __errno_location
+    %define M_SYSCALL_READ 0x0
+%else
+    %define M_EXTERN_CALL_SUFFIX
+    %define M_FT_READ _ft_read
+    %define M_ERRNO_LOCATION ___error
+    %define M_SYSCALL_READ 0x2000003
+%endif
 
-%define M_EXTERN_CALL_SUFFIX wrt ..plt
-
-extern ___error
-extern __errno_location
+%define M_EXTERN_CALL_SUFFIX 
+extern M_ERRNO_LOCATION
+;extern Mx
 section .text ; the text section is where we'll put executable code
-global ft_read ; _start is our entry point - this is its declaration...
+global M_FT_READ ; _start is our entry point - this is its declaration...
 
-ft_read:
-	mov     rax, 0    ; read
-	syscall
-	cmp		rax, 0
-	jl		error
-	ret
+M_FT_READ:
+    mov  rax, M_SYSCALL_READ
+    syscall
+%ifdef LINUX
+    cmp  rax, 0
+    jl   FT_READ_ERROR
+%else
+    jc   FT_READ_ERROR
+%endif
+    ret
+FT_READ_ERROR:
+%ifdef LINUX
+    neg  rax
+%endif
+    push rax
+    call M_ERRNO_LOCATION M_EXTERN_CALL_SUFFIX
+    pop  qword [rax]
+    mov  rax, -1
+    ret
 
-error:
-	neg		rax
-	push	rax
-    call	__errno_location M_EXTERN_CALL_SUFFIX
-    pop		qword [rax]
-    mov		rax, -1
-	ret
+
+
+;	mov     rax, 0    ; read
+;	syscall
+;	cmp		rax, 0
+;	jl		error
+;	ret
+;
+;error:
+;	neg		rax
+;	push	rax
+;    call	M_ERRNO_LOCATION M_EXTERN_CALL_SUFFIX
+;    pop		qword [rax]
+;    mov		rax, -1
+;	ret
 
 ;	mov     rax, 2      ; open
 ;	mov     rdi, path
