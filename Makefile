@@ -2,6 +2,7 @@ SRC = read.S\
 	  write.S\
 	  ft_strlen.S\
 	  ft_strcpy.S\
+	  ft_strcmp.S\
 #SRC = $(addprefix src/, ${SOURCES})
 OBJ = $(patsubst %.S, %.o, ${SRC})
 NAME = libasm.a
