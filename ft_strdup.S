@@ -13,6 +13,7 @@
     %define M_ERRNO_LOCATION ___error
     %define M_MALLOC _malloc
 %endif
+
 extern M_MALLOC
 extern M_FT_STRCPY
 extern M_FT_STRLEN
@@ -27,12 +28,13 @@ M_FT_STRDUP:
     mov     rdi, rax
     call    M_MALLOC wrt ..plt
     cmp     rax, 0
-    je      END
-    pop     rsi
+    je      STRDUP_MALLOC_ERROR
     mov     rdi, rax
+    pop     rsi
     call    M_FT_STRCPY
     ret
 
-END:
-    pop     rdi 
+STRDUP_MALLOC_ERROR:
+    pop     rdi
     ret
+

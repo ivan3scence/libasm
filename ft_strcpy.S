@@ -10,17 +10,17 @@ global M_FT_STRCPY
 M_FT_STRCPY:
 	push	rcx
 	xor		rcx, rcx
-	jmp		ITER
+	jmp		CPY_ITER
 
-ITER:
-	mov		rdx, [rsi + rcx]
-	mov		[rdi + rcx], rdx
-	cmp		rdx, byte 0
-	jz		NULL_BYTE
+CPY_ITER:
+	mov		dl, [rsi + rcx]
+	mov		[rdi + rcx], dl
+	cmp		dl, 0
+	jz		CPY_NULL_BYTE
 	inc		rcx
-	jmp		ITER
+	jmp		CPY_ITER
 	
-NULL_BYTE:
+CPY_NULL_BYTE:
 	mov		rax, rdi
 	pop		rcx
 	ret

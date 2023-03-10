@@ -9,7 +9,9 @@ OBJ = $(patsubst %.S, %.o, ${SRC})
 NAME = libasm.a
 ASM = nasm
 CC   = cc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra  -fomit-frame-pointer
+#-no-pie
+#-fsanitize=address
 #FLAGS = -F dwarf -g -f macho64
 FLAGS = -f elf64 -F dwarf -g -DLINUX=1
 MAINPRG = main_lol
@@ -17,7 +19,7 @@ EXECPRG = exec_lol
 LIB 	= -L. -lasm
 
 ifeq ($(MAKECMDGOALS), lr)
-FLAGS = -f elf64 -F dwarf -g -DLINUX=1
+FLAGS = -f elf64 -DLINUX=1
 endif
 ifeq ($(MAKECMDGOALS), l)
 FLAGS = -f elf64 -F dwarf -g -DLINUX=1
