@@ -4,12 +4,25 @@ SRC = read.S\
 	  ft_strcpy.S\
 	  ft_strcmp.S\
 	  ft_strdup.S\
+
+SRC_BONUS = ft_list_size.S\
 #SRC = $(addprefix src/, ${SOURCES})
 OBJ = $(patsubst %.S, %.o, ${SRC})
+MAIN = main.c
+
+ifeq ($(MAKECMDGOALS), bonus)
+OBJ = $(patsubst %.S, %.o, ${SRC}) $(patsubst %.S, %.o, ${SRC_BONUS})
+endif
+
+ifeq ($(MAKECMDGOALS), cb)
+MAIN = main_bonus.c
+OBJ = $(patsubst %.S, %.o, ${SRC}) $(patsubst %.S, %.o, ${SRC_BONUS})
+endif
+
 NAME = libasm.a
 ASM = nasm
 CC   = cc
-CFLAGS = -Wall -Werror -Wextra  -fomit-frame-pointer
+CFLAGS = 
 #-no-pie
 #-fsanitize=address
 #FLAGS = -F dwarf -g -f macho64
@@ -33,6 +46,8 @@ endif
 
 all: 	${NAME}
 
+bonus: 	${NAME}
+
 l: 		all
 
 lr: 	fclean all
@@ -41,8 +56,10 @@ x: 		${OBJ}
 	ld $? -o ${EXECPRG}
 
 c: 		${NAME}
-	${CC} ${CFLAGS} ${OBJ} main.c -o ${MAINPRG}
+	${CC} ${CFLAGS} ${OBJ} ${MAIN} -o ${MAINPRG}
 #	${CC} ${CFLAGS} -L./ -lasm  main.c -o ${MAINPRG}
+
+cb:		c	
 
 ${NAME}: 	${OBJ}
 	ar -rc ${NAME} $?

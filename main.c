@@ -52,26 +52,26 @@ int main() {
   //    printf("my:%d\n", ft_strcmp("lo","lol"));
   //    printf("st:%d\n", strcmp("lo","lol"));
 
-  char *tmp = 0;
+  // char *tmp = 0;
 
-  tmp = ft_strdup("lol");
-  printf("my:%s\n", tmp);
-  free(tmp);
-  tmp = strdup("lol");
-  printf("st:%s\n", tmp);
-  free(tmp);
-  tmp = ft_strdup("");
-  printf("my:%s\n", tmp);
-  free(tmp);
-  tmp = strdup("");
-  printf("st:%s\n", tmp);
-  free(tmp);
-  tmp = ft_strdup("lol\0hui");
-  printf("my:%s\n", tmp);
-  free(tmp);
-  tmp = strdup("lol\0hui");
-  printf("st:%s\n", tmp);
-  free(tmp);
+  // tmp = ft_strdup("lol");
+  // printf("my:%s\n", tmp);
+  // free(tmp);
+  // tmp = strdup("lol");
+  // printf("st:%s\n", tmp);
+  // free(tmp);
+  // tmp = ft_strdup("");
+  // printf("my:%s\n", tmp);
+  // free(tmp);
+  // tmp = strdup("");
+  // printf("st:%s\n", tmp);
+  // free(tmp);
+  // tmp = ft_strdup("lol\0hui");
+  // printf("my:%s\n", tmp);
+  // free(tmp);
+  // tmp = strdup("lol\0hui");
+  // printf("st:%s\n", tmp);
+  // free(tmp);
 
   free(buf);
   return (0);
