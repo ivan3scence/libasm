@@ -28,7 +28,6 @@ ASM = nasm
 CC   = cc
 CFLAGS = -g -fsanitize=address
 #-no-pie
-#-fsanitize=address
 FLAGS = -F dwarf -g -f macho64
 #FLAGS = -f elf64 -F dwarf -g -DLINUX=1
 EXECPRG = exec_lol

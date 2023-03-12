@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,10 +21,7 @@ int ft_list_size(t_list *begin_list);
 void ft_list_push_front(t_list **begin_list, void *data);
 void ft_list_sort(t_list **begin_list, int (*cmp)());
 
-int cmp(void *d1, void *d2) {
-  printf("joj\n");
-  return ((int)d1 - (int)d2);
-}
+int cmp(void *d1, void *d2) { return ((int)d1 - (int)d2); }
 
 t_list *new_elem(void *data) {
   t_list *new_elem = (t_list *)malloc(sizeof(t_list));
@@ -60,13 +58,15 @@ int main() {
   beg = &arr;
   printf("ft_list_size: %d\n", ft_list_size(arr));
   printf("sizeof: %ld\n", sizeof(t_list));
-  ft_list_push_front(beg, (void *)0x228);
+  ft_list_push_front(beg, (void *)0x0);
   printf("ft_list_push_front: %p\n", (*beg)->data);
   printf("ft_list_push_front: %p\n", (*beg)->next);
   printf("ft_list_push_front: %p\n", arr);
 
   // check_sort();
+  // t_list *lol = ft_list_sort(beg, *cmp);
   ft_list_sort(beg, *cmp);
+  // printf("%p\n%p\n", (void *)lol, (void *)*beg);
   t_list *tmp = *beg;
   int num = 0;
   while (tmp) {
