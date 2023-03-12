@@ -20,8 +20,10 @@ int ft_list_size(t_list *begin_list);
 void ft_list_push_front(t_list **begin_list, void *data);
 void ft_list_sort(t_list **begin_list, int (*cmp)());
 
-//(*cmp)(list_ptr->data, list_other_ptr->data);
-int cmp(void *d1, void *d2) { return (d1 > d2 ? 1 : d1 == d2 ? 0 : -1); }
+int cmp(void *d1, void *d2) {
+  printf("joj\n");
+  return ((int)d1 - (int)d2);
+}
 
 t_list *new_elem(void *data) {
   t_list *new_elem = (t_list *)malloc(sizeof(t_list));
@@ -47,6 +49,8 @@ t_list *elem_array(size_t nb) {
   return (begin);
 }
 
+void check_sort(void) { t_list *a = elem_array(4); }
+
 int main() {
   //    int     fd=open("lol", O_RDONLY);
   char *buf = malloc(33333);
@@ -56,10 +60,19 @@ int main() {
   beg = &arr;
   printf("ft_list_size: %d\n", ft_list_size(arr));
   printf("sizeof: %ld\n", sizeof(t_list));
-  ft_list_push_front(beg, (void *)0xdeadbeaf);
+  ft_list_push_front(beg, (void *)0x228);
   printf("ft_list_push_front: %p\n", (*beg)->data);
   printf("ft_list_push_front: %p\n", (*beg)->next);
   printf("ft_list_push_front: %p\n", arr);
+
+  // check_sort();
+  ft_list_sort(beg, *cmp);
+  t_list *tmp = *beg;
+  int num = 0;
+  while (tmp) {
+    printf("elem %d, data %p, next %p\n", num++, tmp->data, tmp->next);
+    tmp = tmp->next;
+  }
 
   free(buf);
   return (0);

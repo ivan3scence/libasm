@@ -26,7 +26,7 @@ endif
 NAME = libasm.a
 ASM = nasm
 CC   = cc
-CFLAGS = -g 
+CFLAGS = -g -fsanitize=address
 #-no-pie
 #-fsanitize=address
 FLAGS = -F dwarf -g -f macho64
