@@ -18,6 +18,10 @@ typedef struct s_list {
 
 int ft_list_size(t_list *begin_list);
 void ft_list_push_front(t_list **begin_list, void *data);
+void ft_list_sort(t_list **begin_list, int (*cmp)());
+
+//(*cmp)(list_ptr->data, list_other_ptr->data);
+int cmp(void *d1, void *d2) { return (d1 > d2 ? 1 : d1 == d2 ? 0 : -1); }
 
 t_list *new_elem(void *data) {
   t_list *new_elem = (t_list *)malloc(sizeof(t_list));
@@ -51,8 +55,11 @@ int main() {
   t_list *arr = elem_array(4);
   beg = &arr;
   printf("ft_list_size: %d\n", ft_list_size(arr));
-  ft_list_push_front(beg, new_elem((void *)0xdead));
-  printf("ft_list_push_front: %p\n", (*beg)->next->data);
+  printf("sizeof: %ld\n", sizeof(t_list));
+  ft_list_push_front(beg, (void *)0xdeadbeaf);
+  printf("ft_list_push_front: %p\n", (*beg)->data);
+  printf("ft_list_push_front: %p\n", (*beg)->next);
+  printf("ft_list_push_front: %p\n", arr);
 
   free(buf);
   return (0);

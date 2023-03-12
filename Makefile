@@ -7,6 +7,7 @@ SRC = read.S\
 
 SRC_BONUS = ft_list_size.S\
 						ft_list_push_front.S\
+						ft_list_sort.S\
 
 OBJ = $(patsubst %.S, %.o, ${SRC})
 MAIN = main.c
@@ -25,7 +26,7 @@ endif
 NAME = libasm.a
 ASM = nasm
 CC   = cc
-CFLAGS = 
+CFLAGS = -g 
 #-no-pie
 #-fsanitize=address
 FLAGS = -F dwarf -g -f macho64
@@ -69,6 +70,7 @@ ${NAME}: 	${OBJ}
 clean:
 	rm -f ${OBJ}
 	rm -f main.o
+	rm -f main_bonus.o
 
 fclean: 	clean
 	rm -f ${NAME}
