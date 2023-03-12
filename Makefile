@@ -6,9 +6,11 @@ SRC = read.S\
 	  ft_strdup.S\
 
 SRC_BONUS = ft_list_size.S\
-#SRC = $(addprefix src/, ${SOURCES})
+						ft_list_push_front.S\
+
 OBJ = $(patsubst %.S, %.o, ${SRC})
 MAIN = main.c
+MAINPRG = main_lol
 
 ifeq ($(MAKECMDGOALS), bonus)
 OBJ = $(patsubst %.S, %.o, ${SRC}) $(patsubst %.S, %.o, ${SRC_BONUS})
@@ -16,6 +18,7 @@ endif
 
 ifeq ($(MAKECMDGOALS), cb)
 MAIN = main_bonus.c
+MAINPRG = main_lol_bonus
 OBJ = $(patsubst %.S, %.o, ${SRC}) $(patsubst %.S, %.o, ${SRC_BONUS})
 endif
 
@@ -25,9 +28,8 @@ CC   = cc
 CFLAGS = 
 #-no-pie
 #-fsanitize=address
-#FLAGS = -F dwarf -g -f macho64
-FLAGS = -f elf64 -F dwarf -g -DLINUX=1
-MAINPRG = main_lol
+FLAGS = -F dwarf -g -f macho64
+#FLAGS = -f elf64 -F dwarf -g -DLINUX=1
 EXECPRG = exec_lol
 LIB 	= -L. -lasm
 

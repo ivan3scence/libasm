@@ -31,7 +31,11 @@ FT_WRITE_ERROR:
     neg  rax
 %endif
     push rax
+%ifdef LINUX
     call __errno_location wrt ..plt
+%else
+    call M_ERRNO_LOCATION
+%endif
     pop  qword [rax]
     mov  rax, -1
     ret

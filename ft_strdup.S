@@ -26,7 +26,11 @@ M_FT_STRDUP:
     call    M_FT_STRLEN
     inc     rax
     mov     rdi, rax
+%ifdef LINUX
     call    M_MALLOC wrt ..plt
+%else
+    call    M_MALLOC
+%endif
     cmp     rax, 0
     je      STRDUP_MALLOC_ERROR
     mov     rdi, rax
