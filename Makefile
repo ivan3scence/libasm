@@ -3,12 +3,10 @@ SRC = read.S\
 	  ft_strlen.S\
 	  ft_strcpy.S\
 	  ft_strcmp.S\
-	  ft_strdup.S\
+	  ft_strdup.S
 
 SRC_BONUS = ft_list_size.S\
-						ft_list_push_front.S\
-						ft_atoi.S\
-						#ft_list_sort.S\
+						ft_list_push_front.S
 
 OBJ = $(patsubst %.S, %.o, ${SRC})
 MAIN = main.c
@@ -29,8 +27,8 @@ ASM = nasm
 CC   = cc
 CFLAGS = -g -fsanitize=address
 #-no-pie
-FLAGS = -F dwarf -g -f macho64
-#FLAGS = -f elf64 -F dwarf -g -DLINUX=1
+#FLAGS = -F dwarf -g -f macho64
+FLAGS = -f elf64 -F dwarf -g -DLINUX=1
 EXECPRG = exec_lol
 LIB 	= -L. -lasm
 
@@ -68,9 +66,7 @@ ${NAME}: 	${OBJ}
 	ar -rc ${NAME} $?
 
 clean:
-	rm -f ${OBJ}
-	rm -f main.o
-	rm -f main_bonus.o
+	rm -f *.o
 
 fclean: 	clean
 	rm -f ${NAME}
