@@ -7,7 +7,8 @@ SRC = read.S\
 
 SRC_BONUS = ft_list_size.S\
 						ft_list_push_front.S\
-						ft_list_sort.S\
+						ft_atoi.S\
+						#ft_list_sort.S\
 
 OBJ = $(patsubst %.S, %.o, ${SRC})
 MAIN = main.c
@@ -74,6 +75,7 @@ clean:
 fclean: 	clean
 	rm -f ${NAME}
 	rm -f ${MAINPRG}
+	rm -f main_lol_bonus
 	rm -f ${EXECPRG}
 
 re: 	fclean all
